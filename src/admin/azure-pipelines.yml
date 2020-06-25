@@ -5,7 +5,7 @@
 
 trigger:
 - master
-- feature
+- feature/*
 
 variables:
   srcDirectory: '$(Build.SourcesDirectory)/src'
@@ -34,7 +34,7 @@ steps:
   displayName: Build
   inputs:
     command: build
-    projects: '$(srcDirectory)/*.sln'
+    projects: '*.sln'
     arguments: '--configuration $(buildConfiguration)'
 
 # You just added coverlet.collector to use 'XPlat Code Coverage'
