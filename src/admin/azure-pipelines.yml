@@ -5,15 +5,59 @@
 
 trigger:
 - master
+- feature
+
+variables:
+  srcDirectory: '$(Build.SourcesDirectory)/src'
+  testDirectory: '$(Build.SourcesDirectory)/test'
+  buildConfiguration: 'Release'
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: DotNetCoreCLI@2
+  displayName: Restore nuget packages (src)
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+    workingDirectory: $(srcDirectory)
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: DotNetCoreCLI@2
+  displayName: Restore nuget packages (test)
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+    workingDirectory: $(testDirectory)
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: build
+    projects: '$(srcDirectory)/*.sln'
+    arguments: '--configuration $(buildConfiguration)'
+
+# You just added coverlet.collector to use 'XPlat Code Coverage'
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '*Test/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- RunConfiguration.DisableAppDomain=true'
+    workingDirectory: $(testDirectory)
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: custom
+    custom: tool
+    arguments: install --tool-path . dotnet-reportgenerator-globaltool
+  displayName: Install ReportGenerator tool
+
+- script: ./reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"
+  displayName: Create reports
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
