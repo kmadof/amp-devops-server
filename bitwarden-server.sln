@@ -50,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsProcessor", "src\Even
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrator", "util\Migrator\Migrator.csproj", "{54DED792-A022-417E-9804-21FCC9C7C610}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Test", "test\Api.Test\Api.Test.csproj", "{860DE301-0B3E-4717-9C21-A9B4C3C2B121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Test", "test\Api.Test\Api.Test.csproj", "{860DE301-0B3E-4717-9C21-A9B4C3C2B121}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,8 +70,6 @@ Global
 		{58554E52-FDEC-4832-AFF9-302B01E08DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58554E52-FDEC-4832-AFF9-302B01E08DCA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{58554E52-FDEC-4832-AFF9-302B01E08DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58554E52-FDEC-4832-AFF9-302B01E08DCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58554E52-FDEC-4832-AFF9-302B01E08DCA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{02BC2982-ED8D-4A6D-A41E-092B3DAEB98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02BC2982-ED8D-4A6D-A41E-092B3DAEB98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02BC2982-ED8D-4A6D-A41E-092B3DAEB98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
