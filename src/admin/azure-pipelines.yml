@@ -5,7 +5,6 @@
 
 trigger:
 - master
-- feature/*
 
 variables:
   srcDirectory: '$(Build.SourcesDirectory)/src'
