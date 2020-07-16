@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
     - 'src/Api/*'
+    - 'devops/azure-devops/templates/*'
 
 pool:
   vmImage: 'ubuntu-latest'
