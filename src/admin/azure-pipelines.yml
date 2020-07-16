@@ -6,46 +6,8 @@
 trigger:
 - master
 
-variables:
-  srcDirectory: '$(Build.SourcesDirectory)/src'
-  testDirectory: '$(Build.SourcesDirectory)/test'
-  projectName: 'Admin'
-  projectPath: '$(srcDirectory)/$(projectName)/$(projectName).csproj'
-  buildConfiguration: 'Release'
-
-pool:
-  vmImage: 'windows-latest'
-
-steps:
-- task: DotNetCoreCLI@2
-  displayName: Restore nuget packages (src)
-  inputs:
-    command: restore
-    projects: '$(projectPath)'
-
-- task: DotNetCoreCLI@2
-  displayName: Restore nuget packages (test)
-  inputs:
-    command: restore
-    projects: '$(projectPath)'
-
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: build
-    projects: '$(projectPath)'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: '$(projectPath)'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
-
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: '$(projectName)'
+extends:
+  template: devops/azure-devops/templates/build-dotnet-core.yaml
+  parameters:
+    buildConfiguration: 'Release'
+    projectName: 'Admin'
