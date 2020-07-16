@@ -7,7 +7,7 @@ trigger:
 - master
 
 extends:
-  template: devops/azure-devops/templates/build-dotnet-core.yaml
+  template: /devops/azure-devops/templates/build-dotnet-core.yaml
   parameters:
     buildConfiguration: 'Release'
     projectName: 'Admin'
