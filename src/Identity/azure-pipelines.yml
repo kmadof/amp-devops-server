@@ -4,7 +4,7 @@ trigger:
     - master
   paths:
     include:
-    - 'src/Billing/*'
+    - 'src/Identity/*'
     - 'devops/azure-devops/templates/*'
 
 pool:
@@ -14,4 +14,4 @@ extends:
   template: /devops/azure-devops/templates/build-dotnet-core.yaml
   parameters:
     buildConfiguration: 'Release'
-    projectName: 'Billing'
+    projectName: 'Identity'
