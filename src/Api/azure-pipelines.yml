@@ -4,7 +4,7 @@ trigger:
     - master
   paths:
     include:
-    - 'src/Admin/*'
+    - 'src/Api/*'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -13,4 +13,4 @@ extends:
   template: /devops/azure-devops/templates/build-dotnet-core.yaml
   parameters:
     buildConfiguration: 'Release'
-    projectName: 'Admin'
+    projectName: 'Api'
