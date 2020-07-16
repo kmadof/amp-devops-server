@@ -13,9 +13,6 @@ variables:
   testDirectory: '$(Build.SourcesDirectory)/test'
   projectPath: '$(srcDirectory)/${{ projectName }}/${{ projectName }}.csproj'
 
-pool:
-  vmImage: 'windows-latest'
-
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore nuget packages (src)

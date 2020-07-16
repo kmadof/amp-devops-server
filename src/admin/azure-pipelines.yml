@@ -6,6 +6,9 @@
 trigger:
 - master
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 extends:
   template: /devops/azure-devops/templates/build-dotnet-core.yaml
   parameters:
