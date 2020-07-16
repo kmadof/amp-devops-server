@@ -11,7 +11,7 @@ parameters:
 variables:
   srcDirectory: '$(Build.SourcesDirectory)/src'
   testDirectory: '$(Build.SourcesDirectory)/test'
-  projectPath: '$(srcDirectory)/${{ projectName }}/${{ projectName }}.csproj'
+  projectPath: '$(srcDirectory)/${{ parameters.projectName }}/${{ parameters.projectName }}.csproj'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -31,18 +31,18 @@ steps:
   inputs:
     command: build
     projects: '$(projectPath)'
-    arguments: '--configuration ${{ buildConfiguration }}'
+    arguments: '--configuration ${{ parameters.buildConfiguration }}'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
     publishWebProjects: false
     projects: '$(projectPath)'
-    arguments: '--configuration ${{ buildConfiguration }} --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration ${{ parameters.buildConfiguration }} --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: '${{ projectName }}'
+    artifactName: '${{ parameters.projectName }}'
